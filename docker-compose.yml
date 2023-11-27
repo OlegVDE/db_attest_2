@@ -1,0 +1,22 @@
+version: "2.8"
+name: db-att-2
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: ch-att-2
+    networks:
+        - clickhouse
+    ulimits:
+        nofile:
+          soft: 262144
+          hard: 262144 
+    ports:
+      - "8123:8123"
+    volumes:
+      - vol-att-2:/var/lib/clickhouse
+      - ./init_folder:/docker-entrypoint-initdb.d
+
+volumes:
+  vol-att-2:
+networks:
+  clickhouse:
